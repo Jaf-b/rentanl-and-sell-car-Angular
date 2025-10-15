@@ -1,0 +1,75 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+      (
+        color: (
+          theme-type: dark,
+          primary: mat.$blue-palette,
+          tertiary: mat.$blue-palette,
+        ),
+        typography: Quicksand,
+        density: 0,
+      )
+  );
+}
+
+/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: Quicksand;
+  font-style: normal;
+
+  font-weight: 600;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'proxima-nova', sans-serif;
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-outline);
+  font-size: 14px;
+}
+
+.my-Dialog {
+  .mat-mdc-dialog-container {
+    --mdc-dialog-container-shape: 10px;
+  }
+}
+
+
+.badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 0.1rem 0.5rem;
+  text-align: center;
+  height: fit-content;
+  border-radius: 20px;
+  background-color: limegreen;
+  gap: 0.1rem;
+  color: white;
+  font-size: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.max-width {
+  max-width: 1100px;
+  margin: auto;
+}
+
+
+

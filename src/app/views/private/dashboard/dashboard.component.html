@@ -1,0 +1,165 @@
+<div class="container">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <span>Chiffre d'affaires</span>
+      <h1>3245.89 $</h1>
+      <div class="subtitle">
+        <div class="badge">
+          <mat-icon>call_made</mat-icon>
+          <span>42% </span>
+        </div>
+        <span>par rapport au dernier mois</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <span>Commandes</span>
+      <h1>42</h1>
+      <div class="subtitle">
+        <div class="badge">
+          <mat-icon>call_made</mat-icon>
+          <span>8.2%</span>
+        </div>
+        <span>par rapport au dernier mois</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <span>Nouveaux Clients</span>
+      <h1>18</h1>
+      <div class="subtitle">
+        <div class="badge">
+          <mat-icon>call_made</mat-icon>
+          <span>35.1%</span>
+        </div>
+        <span>par rapport au dernier mois</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <span>Chiffre d'affaires</span>
+      <h1>7</h1>
+      <div class="subtitle">
+        <div class="badge">
+          <mat-icon>call_made</mat-icon>
+          <span>4%</span>
+        </div>
+        <span>par rapport au dernier mois</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div style="display: flex; align-items: center;justify-content: center; gap:0.5rem;margin: 1rem">
+  <div class="container3">
+    <mat-card appearance="outlined">
+      <mat-card-content></mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div>
+            <span style="font-size:22px;font-weight: bold">Etat de Stocks</span>
+            <br/>
+            <span class="subtitle" style="font-size: 12px">7 produits en rupture de stock</span>
+          </div>
+          <button mat-stroked-button type="button">Voir tout</button>
+        </div>
+        <table mat-table [dataSource]="data" class="mat-elevation-z8">
+          <!-- Implicit Column -->
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef><b>Commande</b></th>
+            <td mat-cell *matCellDef="let data"> {{ data }}</td>
+          </ng-container>
+
+          <!-- Index Column -->
+          <ng-container matColumnDef="client">
+            <th mat-header-cell *matHeaderCellDef><b>Client</b></th>
+            <td mat-cell *matCellDef="let index = index"> {{ index }}</td>
+          </ng-container>
+
+          <!-- Count Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef><b>Date</b></th>
+            <td mat-cell *matCellDef="let count = count"> {{ count }}</td>
+          </ng-container>
+
+          <!-- First Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef><b>Montant</b></th>
+            <td mat-cell *matCellDef="let first = first"> {{ first }}</td>
+          </ng-container>
+
+          <!-- Last Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef><b>Statut</b></th>
+            <td mat-cell *matCellDef="let last = last"> {{ last }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="container2">
+    <mat-card appearance="outlined">
+      <mat-card-content></mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div>
+            <span>Etat de Stocks</span>
+            <br/>
+            <span class="subtitle" style="font-size: 12px">7 produits en rupture de stock</span>
+          </div>
+          <button mat-stroked-button type="button">Gerer</button>
+        </div>
+        <div>
+          <div class="article">
+            <div>
+              <span>T-shirt Prenium</span>
+              <div class="badge">
+                <span style="font-size: 12px">critique</span>
+              </div>
+            </div>
+            <span>50/100</span>
+          </div>
+          <div>
+            <mat-progress-bar [value]="50"></mat-progress-bar>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div>
+            <span>Produits Populaires</span>
+            <br/>
+            <span class="subtitle" style="font-size: 12px">Top des ventes ce mois-ci</span>
+          </div>
+          <button mat-stroked-button type="button">Voir tout</button>
+        </div>
+        <div>
+          <div class="articlePopulaire">
+            <div>
+              <span>T-shirt Prenium</span>
+            </div>
+            <span>750 $ </span>
+          </div>
+          <div style="display:flex;justify-content: space-between;align-items: center">
+            <span style="font-size: 11px;color: gray">84 vendus</span>
+            <span style="font-size: 11px; color: limegreen">+ 8%</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
