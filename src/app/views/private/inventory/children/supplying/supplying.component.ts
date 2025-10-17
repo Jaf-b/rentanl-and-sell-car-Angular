@@ -88,7 +88,12 @@ export interface SupplyEntry {
               {{ formatCurrency(supply.price) }}
             </td>
           </ng-container>
-
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let supply" class="total-cost">
+              <mat-icon (click)="deleteCar(supply._id)" style="cursor:pointer">delete</mat-icon>
+            </td>
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="supplyColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: supplyColumns"></tr>
         </table>
@@ -138,7 +143,8 @@ export default class SupplyingComponent implements OnInit {
     'volant',
     'km',
     'couleur',
-    'price'
+    'price',
+    'action'
   ];
 
 
@@ -158,4 +164,9 @@ export default class SupplyingComponent implements OnInit {
     })
   }
 
+  deleteCar(id: string) {
+    this.db.deleteCar(id).subscribe(
+      e => console.log(e)
+    )
+  }
 }

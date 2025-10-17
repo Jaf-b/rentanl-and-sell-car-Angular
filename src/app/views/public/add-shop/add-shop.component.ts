@@ -152,6 +152,7 @@ export class AddShopComponent implements OnInit {
             localStorage.setItem('IsAdmin', e.IsAdmin);
             localStorage.setItem('UserID', e._id);
             localStorage.setItem('UserID', e.UserID);
+
             location.reload();
             console.log("user : " + e)
           }
@@ -171,8 +172,9 @@ export class AddShopComponent implements OnInit {
 
 
     this.db.createShop(shop).subscribe(
-      e => {
+      (e: shopModel) => {
         console.log(e);
+        localStorage.setItem('ShopID', e._id!);
         location.assign(`/shop/${UserID}`)
       }
     )

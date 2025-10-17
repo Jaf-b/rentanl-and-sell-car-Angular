@@ -30,12 +30,16 @@ export class databaseService {
     return this.http.post(`${this.Url}/car`, car);
   }
 
+  deleteCar(id: string) {
+    return this.http.delete(`${this.Url}/car/${id}`);
+  }
+
   getShop(UserID: string) {
     return this.http.get<shopModel>(`${this.Url}/shop/${UserID}`);
   }
 
   createShop(shop: shopModel) {
-    return this.http.post(`${this.Url}/shop`, shop);
+    return this.http.post<shopModel>(`${this.Url}/shop`, shop);
   }
 
 }
