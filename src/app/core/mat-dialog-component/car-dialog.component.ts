@@ -168,7 +168,7 @@ export class CarDialogComponent {
     for (let i = 0; i < image.files.length; i++) {
       formData.append('images', image.files[i]);
     }
-    const data = {...this.CarForm.getRawValue(), UserID: "JAfred2012"}
+    const data = this.CarForm.getRawValue();
     formData.append("km", data.km)
     formData.append("fuel", data.fuel)
     formData.append("couleur", data.couleur)
@@ -182,7 +182,6 @@ export class CarDialogComponent {
     formData.append("transmission", data.transmission)
     formData.append("volant", data.volant)
     formData.append("price", data.price)
-    formData.append("UserID", data.UserID)
     formData.append("ShopID", localStorage.getItem("ShopID")!)
     this.db.AddCar(formData).subscribe((e) => {
       this.Dialog.closeAll();
