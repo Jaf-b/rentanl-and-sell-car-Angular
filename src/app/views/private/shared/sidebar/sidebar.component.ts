@@ -28,8 +28,8 @@ import {MatMenuItem} from '@angular/material/menu';
             <mat-icon>warehouse</mat-icon>
             <span>Inventory</span>
           </a>
-          <a routerLink="./promote" mat-menu-item routerLinkActive="active-link">
-            <mat-icon>campaign</mat-icon>
+          <a routerLink="./caisse" mat-menu-item routerLinkActive="active-link">
+            <mat-icon>paid</mat-icon>
             <span>Promote</span>
           </a>
           <a routerLink="./setting" mat-menu-item routerLinkActive="active-link">

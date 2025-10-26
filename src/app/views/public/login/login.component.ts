@@ -10,6 +10,7 @@ import {APP_NAME, LOGO} from '../../../constant';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../../core/service/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatDividerModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    RouterLink,
   ],
   template: `
     <div class="container">
@@ -50,8 +52,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button (click)="onLogin()" mat-flat-button type="submit">Suivant</button>
+          <button (click)="onLogin()" mat-flat-button type="submit">Connexion</button>
         </mat-card-actions>
+        <mat-card-footer>
+          <p style="text-align: center;margin: 0.5rem">vous n'avez pas de compte ? cliquez <a routerLink="/sigin">ici</a></p>
+        </mat-card-footer>
       </mat-card>
     </div>
   `,

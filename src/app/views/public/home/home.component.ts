@@ -10,8 +10,9 @@ import {carModel} from '../../../core/model/car-model';
 
 @Component({
   selector: 'app-home',
-  imports: [MatCardModule, CardComponent],
+  imports: [MatCardModule, CardComponent, ToolbarComponent],
   template: `
+    <app-toolbar/>
     <div class="container">
       <mat-card>
         <img src="./img/sara-kurfess-6AT_1VDx-GQ-unsplash.jpg" alt="" srcset="">

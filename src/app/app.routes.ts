@@ -68,6 +68,14 @@ export const routes: Routes = [
               ),
           },
           {
+            path: 'reservation',
+            title: 'Reservation',
+            loadComponent: () =>
+              import('./views/private/inventory/children/reservation/reservation.component').then(
+                m => m.default,
+              ),
+          },
+          {
             path: 'stock',
             title: 'Stock',
             loadComponent: () =>

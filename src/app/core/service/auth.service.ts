@@ -28,6 +28,9 @@ export class AuthService {
   login(email: string, password: string) {
     return this.HttpClient.post<any>(`${this.url}/login`, {email: email, password: password})
   }
+  sigin(email: string, password: string,IsAdmin:boolean) {
+    return this.HttpClient.post<any>(`${this.url}/registration`, {email: email, password: password, IsAdmin:IsAdmin})
+  }
 
   logout() {
     localStorage.removeItem('jwt');
@@ -36,5 +39,9 @@ export class AuthService {
     this.isAdmin = false;
     this.isAuthenticated = false;
   }
+  getValidationCode(){
+    return this.HttpClient.get<string>(`${this.url}/code/validation`);
+  }
+
 
 }

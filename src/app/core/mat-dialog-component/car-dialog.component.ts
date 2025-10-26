@@ -9,22 +9,29 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatRadioGroup, MatRadioModule} from '@angular/material/radio';
 import {databaseService} from '../service/database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-car-dialog',
-  imports: [MatDialogModule, MatButtonModule, MatInputModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, MatDivider, MatRadioModule],
+  imports: [MatDialogModule, NgbModule,MatButtonModule, MatInputModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, MatDivider, MatRadioModule],
   template: `
     <span mat-dialog-title>Ajouter une Voiture</span>
     <mat-divider/>
     <mat-dialog-content>
       <form [formGroup]="CarForm">
         <div style="display:flex;align-items: center;overflow:hidden">
-          @for (img of previews; track $index) {
-            <img width="100%" style="object-fit: cover" [src]="img" alt="" srcset="">
-          } @empty {
-            <img style="cursor:pointer;margin-left:150px" (click)="file.click()" src="./img/images.png" alt=""
-                 srcset="">
-          }
+          <ngb-carousel>
+            <ng-template ngbSlide>
+              @for (img of previews; track $index) {
+                <img width="100%" style="object-fit: cover" [src]="img" alt="" srcset="">
+              } @empty {
+                <img style="cursor:pointer;margin-left:150px" (click)="file.click()" src="./img/images.png" alt=""
+                     srcset="">
+              }
+
+            </ng-template>
+          </ngb-carousel>
+
         </div>
         <input formControlName="images" #file type="file" hidden (change)="getAndPrevisualiseImg($event)"
                accept="image/*" name="uploadImage[]"

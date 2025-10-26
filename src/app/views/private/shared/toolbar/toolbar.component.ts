@@ -56,8 +56,8 @@ import {AuthService} from '../../../../core/service/auth.service';
           </button>
         </mat-menu>
       } @else {
-        <button mat-flat-button type="button">
-          <a style="color:white" routerLink="/login">Se Connecter</a>
+        <button (click)="login()" mat-flat-button type="button">
+          Se Connecter
         </button>
       }
 
@@ -114,5 +114,8 @@ export class ToolbarComponent {
 
   addShop() {
     location.assign('/add-shop');
+  }
+  login(){
+    location.assign('/login');
   }
 }

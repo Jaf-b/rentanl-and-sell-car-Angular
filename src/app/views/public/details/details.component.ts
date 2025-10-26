@@ -6,14 +6,17 @@ import {map} from 'rxjs';
 import {MatCard, MatCardModule} from '@angular/material/card';
 import {carModel} from '../../../core/model/car-model';
 import {MatButtonModule} from '@angular/material/button';
+import { ToolbarComponent } from '../../private/shared/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-details',
   imports: [
     MatCardModule,
     MatButtonModule,
+    ToolbarComponent,
   ],
   template: `
+    <app-toolbar/>
     <div style="display: flex;flex-direction: row-reverse;justify-content:start;padding:1rem;gap:0.5rem">
       <mat-card style="width: 25%;height:500px;">
         <mat-card-content>

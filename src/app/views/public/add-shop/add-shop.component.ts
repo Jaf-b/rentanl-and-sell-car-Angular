@@ -1,5 +1,5 @@
-import {Component, inject, OnInit, ViewChild, viewChild} from '@angular/core';
-import {MatStepper, MatStepperModule} from '@angular/material/stepper';
+import { AfterViewInit, Component, inject, OnInit, ViewChild, viewChild } from '@angular/core';
+import { MatStep, MatStepper, MatStepperModule } from '@angular/material/stepper';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
@@ -11,6 +11,7 @@ import {AuthService} from '../../../core/service/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {databaseService} from '../../../core/service/database.service';
 import {shopModel} from '../../../core/model/shop-model';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-add-shop',
@@ -40,8 +41,8 @@ import {shopModel} from '../../../core/model/shop-model';
       </div>
       <mat-card-content>
         <mat-stepper #stepper style="background-color: transparent"
-                     [linear]="isAuthenticated? stepper.next():''">
-          <mat-step #step [stepControl]="LogginForm" label="Authentification">
+                   linear="true"  >
+          <mat-step  #step [stepControl]="LogginForm" label="Authentification">
             <form [formGroup]="LogginForm" style="margin-top: 1rem">
               <mat-form-field style="margin-top: 1rem" appearance="outline" floatLabel="always">
                 <mat-label>Email</mat-label>
@@ -107,23 +108,36 @@ import {shopModel} from '../../../core/model/shop-model';
     }
   `
 })
-export class AddShopComponent implements OnInit {
+export class AddShopComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+     if(this.isAuthenticated){
+       this.matStep.completed = true;
+       this.matStep.editable = false;
+       this.matStepper.next();
+     }
+
+  }
 
   ngOnInit(): void {
-    if (this.isAuthenticated) {
-      const id = localStorage.getItem('UserID')!;
-      this.db.getShop(id).subscribe((data: any) => {
-        if (data.ShopName) {
-          localStorage.setItem('ShopID', data._id);
-          location.assign(`/shop/${id}`)
+    if(this.isAuthenticated){
+      const userID = localStorage.getItem("UserID")!;
+      this.db.getShop(userID).subscribe(shop => {
+        if(shop){
+          localStorage.setItem('ShopID', shop._id!);
+          localStorage.setItem('IsAdmin', "true");
+          location.assign(`/shop/${userID}`)
         }
-
       })
     }
   }
+  // @ts-ignore
+  @ViewChild('stepper') matStepper:MatStepper ;
+  // @ts-ignore
+  @ViewChild('step') matStep:MatStep ;
 
   protected readonly snackbar = inject(MatSnackBar)
   protected readonly db = inject(databaseService);
+
   auth = inject(AuthService)
   isAuthenticated = this.auth.isAuthenticated
   LogginForm = inject(FormBuilder).nonNullable.group({
@@ -169,15 +183,15 @@ export class AddShopComponent implements OnInit {
       Descriprion: FormData.Description,
       UserID: UserID
     }
-
-
-    this.db.createShop(shop).subscribe(
-      (e: shopModel) => {
-        console.log(e);
-        localStorage.setItem('ShopID', e._id!);
-        location.assign(`/shop/${UserID}`)
-      }
-    )
+    if(this.ShopForm.valid) {
+      this.db.createShop(shop).subscribe(
+        (e: shopModel) => {
+          localStorage.setItem('ShopID', e._id!);
+          localStorage.setItem('IsAdmin', "true");
+          location.assign(`/shop/${UserID}`)
+        }
+      )
+    }
   }
 }
 
